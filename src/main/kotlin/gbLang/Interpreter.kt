@@ -2,7 +2,6 @@ package gbLang
 
 import gbLang.annotaions.Function
 import gbLang.loader.Component
-import kotlin.reflect.KType
 
 class Interpreter(
     parent: ScopedVariables? = null
@@ -36,10 +35,10 @@ class Interpreter(
                     when (val obj = pop()) {
                         is GBLangObject -> (obj.getFunction(token.name).getOrNull() ?: throw IllegalStateException("Function ${token.name} does not exist: $obj")).execute(this, *args, fnName = token.name)
                         is Component -> (obj::class.java.methods.find { it.name == token.name && it.isAnnotationPresent(Function::class.java) } ?: TODO()).invoke(obj, *args)
-                        else -> if (obj::class in ParseFactory.classExtensions) {
+                        else -> if (obj::class in LibFactory.classExtensions) {
 
-                            if (ParseFactory.classExtensions[obj::class]?.get(token.name) != null)
-                                ParseFactory.classExtensions[obj::class]?.get(token.name)
+                            if (LibFactory.classExtensions[obj::class]?.get(token.name) != null)
+                                LibFactory.classExtensions[obj::class]?.get(token.name)
                                     ?.execute(this, *(listOf(obj) + args.toList()).toTypedArray(), fnName = token.name)
                                     ?: error("")
                            else (obj::class.java.methods.find { it.name == token.name && it.parameters.size == args.size} ?: TODO()).invoke(obj, *args)

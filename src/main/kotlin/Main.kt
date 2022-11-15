@@ -1,5 +1,5 @@
 import gbLang.Interpreter
-import gbLang.ParseFactory
+import gbLang.LibFactory
 import gbLang.loader.ExtensionLoader
 import java.io.File
 
@@ -24,7 +24,7 @@ fun argsParser(args: Array<String>) {
 
 
 fun main(args: Array<String>) {
-    val parser = ParseFactory.createWithCustom(ExtensionLoader.extensions)
+    val parser = LibFactory.createWithCustom(ExtensionLoader.extensions)
     val interpreter = Interpreter()
     argsParser(args)
     if (shellMode) {

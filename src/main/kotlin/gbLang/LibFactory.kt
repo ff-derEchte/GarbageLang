@@ -12,7 +12,7 @@ private fun wrapObject(obj: GBLangObject) = object : GBLangFunction {
     override fun execute(instance: Interpreter, vararg args: Any, fnName: String): Any = obj
 }
 
-object ParseFactory {
+object LibFactory {
 
     val classExtensions: Map<KClass<*>, MutableMap<String, GBLangFunction>> = mapOf(
         String::class to mutableMapOf(
