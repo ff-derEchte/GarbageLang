@@ -1,0 +1,24 @@
+@('This is a basic webserver in gb-lang')
+@('This requires the web plugin for the compiler')
+
+Vars.visits(0)
+
+Vars.server(WebApi.createWebServer(8001))
+
+Vars.server.get('/', Consumer.req({
+    Vars.visits(Math.add(1, Vars.visits))
+    Vars.req.respond('<h1>Hello World</h1>')
+}))
+
+Vars.server.get('/test', Consumer.req({
+    Vars.req.respond('<p>Info page</p>')
+}))
+
+Vars.server.get('/quit', Consumer.req({
+    Vars.req.respond('<p>Shutting down</p>')
+    IO.print(Vars.visits, ' visits')
+    System.getProgramControl.exit(0)
+}))
+
+Vars.server.start()
+IO.print('Server Listening on Port: 8001')

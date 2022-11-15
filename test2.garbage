@@ -1,0 +1,56 @@
+
+System.getProgramControl.exit(-1)
+
+System.getIOProvider.getIOHandler.write(System.getClock().getTime().toNumber())
+
+
+Runtime.getFunctionManager.registerFunction('test', 'x', 'y', 'z',
+{
+    Math.add(Vars.x, Vars.y, Vars.z)
+})
+
+Runtime.getFunctionManager.registerFunction('print', 'value',
+ {
+    System.getIOProvider.getIOHandler.write(Vars.value)
+})
+
+Runtime.getFunctionManager.registerFunction('noop',
+{
+    Runtime.Functions.print('called')
+})
+
+Runtime.Functions.noop
+
+Runtime.Functions.print(Runtime.Functions.test(1, 2, 3))
+
+System.getProgramControl.exit(-1)
+
+
+System.getIOProvider.getIOHandler.write(System.getProgramControl.getOsName)
+
+System.getProgramControl.exit(0)
+
+Vars.line(System.getIOProvider().getIOHandler().read('Enter a equation:'))
+System.getIOProvider().getIOHandler().write(Vars.line)
+
+Runtime.getLoopManager().if( { false },
+{
+    System.getIOProvider().getIOHandler().write('success')
+},
+{
+    System.getIOProvider().getIOHandler().write('fail')
+})
+
+System.getIOProvider().getIOHandler().write(System.getFileSystem().openFile('test.garbage2').readText()#)
+VariableManager.setVar('_count', {
+    Vars.x(0)
+    Runtime.getLoopManager.while( { Math.notEquals(Vars.x, 100) },
+    {
+        Vars.x(Math.add(Vars.x, 1))
+        System.getIOProvider().getIOHandler().write(Vars.x)
+    })
+})
+
+
+Runtime.executeScope(VariableManager.getVar('_count'))
+System.getIOProvider.getIOHandler.write(Vars.x)

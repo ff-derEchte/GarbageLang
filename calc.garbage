@@ -1,0 +1,28 @@
+@('A simple Calculator Program')
+
+Func.define.calc('str', {
+    Vars.stack([])
+
+    Vars.str.split(' ').iterate({
+        Runtime.Match(Vars.it)
+        .when('+', {
+            Vars.stack.add(Math.add(Vars.stack.pop, Vars.stack.pop))
+        })
+        .when('-', {
+            Vars.temp(Vars.stack.pop)
+            Vars.stack.add(Math.sub(Vars.stack.pop, Vars.temp))
+        })
+        .else({
+            Vars.stack.add(Numbers.toNumber(Vars.it))
+        }).run
+    })
+
+    Vars.stack.pop
+})
+
+Func.define.main({
+    Vars.line(IO.read('>'))
+    IO.print(Func.calc(Vars.line))
+})
+
+Func.main

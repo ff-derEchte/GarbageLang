@@ -1,0 +1,59 @@
+
+Func.define.testFunction('x', {
+    IO.print(Vars.x)
+    'implicit return'
+})
+
+Func.define.truthMachine({
+    Vars.result(IO.read('>'))
+    Runtime.While({Math.equals(Vars.result, '1')}, {
+        IO.print(1)
+    })
+    IO.print(0)
+})
+
+Func.define.fibonacci('i', {
+    Runtime.Match(Vars.i).when(0, {
+        0
+    }).when(1, {
+        1
+    }).else({
+        Math.add(Func.fibonacci(Math.sub(Vars.i, 1)), Func.fibonacci(Math.sub(Vars.i, 2)))
+    }).run()
+})
+Func.wrapPure('fibonacci')
+
+@('This is the main function')
+Func.define.main({
+
+    Range.to(100).iterate({
+        IO.print(Func.fibonacci(Vars.it))
+    })
+
+
+    Func.truthMachine()
+
+    'Hello World'.iterate({
+        IO.print(Vars.it)
+    })
+
+    Vars.test(1)
+
+    Runtime.If({Math.equals(Vars.test, 1)}, {
+        @('If condition is true')
+        IO.print('Var test is equal to 1')
+    }, {
+        @('else')
+    })
+
+    IO.print(['List', 'Syntax'])
+
+    IO.print(List.create('Hello', 'World').size)
+
+
+    IO.print(Func.testFunction('Hello Function call'))
+})
+
+Func.main()
+
+
