@@ -1,8 +1,8 @@
 # Garbage Lang
 A slow and useless Programming Language.</br>
 The Language has ***no*** keywords but uses function calls to native functions instead.</br>
-This makes the Language even slower, and it also makes compiletime checks for basically anything impossible.<br>
-Error messages was a very important design part and I tried to make them as horrible as possible<br>
+This makes the Language even slower, and it also makes compile-time checks for basically anything impossible.<br>
+Error messages were a very important design part and I tried to make them as horrible as possible<br>
 **Enjoy :3**
 
 ### Hello World Program:
@@ -31,13 +31,13 @@ Vars.getVar('x')
 
 ### Scoped-Expression:
 
-Expressions that are wrapped in **{** and **}** will be passed around a tokens at runtime which means that it can be used for callbacks ar runtime etc.
+Expressions that are wrapped in **{** and **}** will be passed around tokens at runtime which means that it can be used for callbacks at runtime etc.
 ```garbageLang
 Vars.scope({
     IO.print('Hello')
 })
 ```
-Now let's execute the scope via a std library function
+Now let's execute the scope via an std library function
 ```garbageLang
 Runtime.executeScope(Vars.scope)
 ```
@@ -91,7 +91,7 @@ Func.define.test('arg1', 'arg2', {
     IO.print(arg1, arg2)
 })
 ```
-You can call a function dynamically by using a std library function
+You can call a function dynamically by using an std library function
 ```garbageLang
 Func.test(1, 2)
 ```
@@ -99,7 +99,7 @@ The output will be<br> **1 <br>2**
 
 Functions have an implicit return which means that the last statement that's executed will be returned
 ### Function Optimization:
-Pure function that don't have any side effects can be optimized 
+A pure function that doesn't have any side effects can be optimized 
 by collecting the results of the function when its executed. 
 If the function is called multiple times with the same arguments the already calculated result is read and returned.
 You can do this using a built-in function in the std library
@@ -120,9 +120,9 @@ You can optimize this function by calling
 ```garbageLang
 Func.wrapPure('fibonacci')
 ```
-The function is now wrapped by another function which collects the return values of the fibonacci function. This makes the fibonacci function way faster
+The function is now wrapped by another function that collects the return values of the Fibonacci function. This makes the Fibonacci function way faster
 
-**Note: Functions that produce side effects or use external variables do not work correctly if u apply this optimization-function to it**
+**Note: Functions that produce side effects or use external variables do not work correctly if u apply this optimization function to it**
 
 ### Lists
 
@@ -139,7 +139,7 @@ or the special list syntax
 The std library is not documented yet, but you can look at its definition in the **LibFactory.kt** file
 
 ## Expandability 
-The language can be extended by plugin written in Java, Kotlin or any other JVM Language.
+The language can be extended by plugins written in Java, Kotlin, or any other JVM Language.
 Here is an example:
 
 Main Class:
